@@ -21,10 +21,14 @@ def executar_automacao(nome_automacao):
     spec.loader.exec_module(modulo)
 
 
-    if request.method == 'GET':
-        args = []
+    if request.method == 'POST':
+        if request.is_json:
+            args = request.json.get("args", [])
+        else:
+            return jsonify({"erro": "Requisição POST deve ser JSON"}), 415
     else:
-        args = request.json.get("args", [])
+        args = []
+        
 
     resultado = modulo.executar(args)
 
