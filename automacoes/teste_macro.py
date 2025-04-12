@@ -2,8 +2,8 @@ import pandas as pd
 
 def executar(args=None):
 
-    caminho_arquivo = 'dados\\Teste M.xlsx'
-    arquivo_saida = 'dados\\Teste.txt'
+    caminho_arquivo = 'dados/Teste M.xlsx'
+    arquivo_saida = 'dados/Teste.txt'
 
     df = pd.read_excel(caminho_arquivo)
 
