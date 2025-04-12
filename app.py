@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     return "Servidor de Automação Online"
 
-@app.route('/executar/<nome_automacao>', methods=['POST'])
+@app.route('/executar/<nome_automacao>', methods=['GET','POST'])
 def executar_automacao(nome_automacao):
     caminho = f'automacoes/{nome_automacao}.py'
 
