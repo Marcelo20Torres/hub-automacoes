@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import importlib.util
 import os
 
@@ -8,6 +8,16 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return "Servidor de Automação Online"
+
+@app.route('/download/<nome_arquivo>', methods=['GET'])
+def download_arquivo(nome_arquivo):
+    caminho = f"dados/{nome_arquivo}"
+    if os.path.exists(caminho):
+        return send_file(caminho, as_attachment=True)
+    else:
+        return jsonify({"erro", "Arquivo não encontrado"}), 404
+    
+
 
 @app.route('/executar/<nome_automacao>', methods=['GET','POST'])
 def executar_automacao(nome_automacao):
@@ -28,7 +38,7 @@ def executar_automacao(nome_automacao):
             return jsonify({"erro": "Requisição POST deve ser JSON"}), 415
     else:
         args = []
-        
+
 
     resultado = modulo.executar(args)
 
