@@ -15,7 +15,7 @@ def download_arquivo(nome_arquivo):
     if os.path.exists(caminho):
         return send_file(caminho, as_attachment=True)
     else:
-        return jsonify({"erro", "Arquivo não encontrado"}), 404
+        return jsonify({"erro": "Arquivo não encontrado"}), 404
     
 
 
