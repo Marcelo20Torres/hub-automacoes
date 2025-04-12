@@ -20,7 +20,12 @@ def executar_automacao(nome_automacao):
     modulo = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(modulo)
 
-    args = request.json.get("args", [])
+
+    if request.method == 'GET':
+        args = []
+    else:
+        args = request.json.get("args", [])
+
     resultado = modulo.executar(args)
 
     return jsonify({"resultado": resultado})
